@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Profile - HRMS Akunza</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="./frontend/css/style.css">
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <i class="fa-solid fa-notes-medical"></i>
+      <div>HRMS<span class="sb-sub">Akunza PHC</span></div>
+    </div>
+    <nav>
+      <a href="dashboard.html"><i class="fa-solid fa-user-injured"></i> Patients</a>
+      <a href="users.html" id="usersLink" hidden><i class="fa-solid fa-users"></i> Manage Users</a>
+      <a href="profile.html" class="active"><i class="fa-solid fa-id-badge"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sf-name" id="sbUserName"></div>
+      <span class="sf-role" id="sbUserRole"></span>
+      <button class="btn btn-outline btn-sm btn-block" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="shell-main">
+    <div class="shell-content" style="max-width:560px;">
+
+      <div class="page-title">
+        <div>
+          <h1>Profile</h1>
+          <p>Your account details and password.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="profile-header">
+          <div class="profile-avatar" id="avatarInitials"></div>
+          <div>
+            <div style="font-size:16px; font-weight:700;" id="profileName"></div>
+            <div style="font-size:13px; color:var(--ink-soft);" id="profileEmail"></div>
+            <span class="badge badge-admin" id="profileRoleBadge" style="margin-top:6px; display:inline-block;"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 style="font-size:16px; margin:0 0 4px;">Change Password</h2>
+        <p style="font-size:13px; color:var(--ink-soft); margin:0 0 16px;">Update your login password.</p>
+
+        <form id="passwordForm">
+          <div class="field">
+            <label for="currentPassword">Current Password</label>
+            <input type="password" id="currentPassword" required>
+          </div>
+          <div class="field">
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" required minlength="6">
+          </div>
+          <div class="field">
+            <label for="confirmPassword">Confirm New Password</label>
+            <input type="password" id="confirmPassword" required minlength="6">
+          </div>
+
+          <div id="successBox" class="success-box" hidden></div>
+          <div id="passwordErrorBox" class="error-box" hidden></div>
+
+          <button type="submit" class="btn btn-primary" id="passwordSubmitBtn">
+            <i class="fa-solid fa-key"></i> Update Password
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="./frontend/js/auth.js"></script>
+<script src="./frontend/js/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patient Record - HRMS Akunza</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="./frontend/css/style.css">
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <i class="fa-solid fa-notes-medical"></i>
+      <div>HRMS<span class="sb-sub">Akunza PHC</span></div>
+    </div>
+    <nav>
+      <a href="dashboard.html" class="active"><i class="fa-solid fa-user-injured"></i> Patients</a>
+      <a href="users.html" id="usersLink" hidden><i class="fa-solid fa-users"></i> Manage Users</a>
+      <a href="profile.html"><i class="fa-solid fa-id-badge"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sf-name" id="userName"></div>
+      <span class="sf-role" id="userRole"></span>
+      <button class="btn btn-outline btn-sm btn-block" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="shell-main">
+    <div class="shell-content">
+
+      <a href="dashboard.html" style="font-size:13px; color:var(--ink-soft); text-decoration:none; display:inline-block; margin-bottom:14px;">
+        <i class="fa-solid fa-arrow-left"></i> Back to Patients
+      </a>
+
+      <!-- Patient Bio Card -->
+      <div class="card" id="bioCard">
+        <div class="page-title">
+          <div>
+            <h1 id="bioName">Loading...</h1>
+            <p id="bioMeta"></p>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="openEditPanel()">
+            <i class="fa-solid fa-pen"></i> Edit
+          </button>
+        </div>
+        <div id="bioDetails" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap:14px; margin-top:10px; font-size:14px;"></div>
+      </div>
+
+      <!-- Records -->
+      <div class="page-title">
+        <div>
+          <h1 style="font-size:18px;">Medical History</h1>
+          <p>Chronological visit and treatment records.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openRecordPanel()">
+          <i class="fa-solid fa-file-medical"></i> Add New Record
+        </button>
+      </div>
+
+      <div id="recordsList"></div>
+
+      <div id="emptyRecords" class="card empty-state" hidden>
+        <i class="fa-solid fa-clipboard"></i>
+        <p>No medical records yet for this patient.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Add Record Panel -->
+<div class="panel-overlay" id="recordPanelOverlay" hidden>
+  <div class="panel">
+    <h2>Add Medical Record</h2>
+    <p class="panel-sub">Log a new visit for this patient.</p>
+
+    <form id="recordForm">
+      <div class="field">
+        <label for="rDiagnosis">Diagnosis</label>
+        <input type="text" id="rDiagnosis" required>
+      </div>
+      <div class="field">
+        <label for="rSymptoms">Symptoms</label>
+        <input type="text" id="rSymptoms">
+      </div>
+      <div class="field">
+        <label for="rTreatment">Treatment</label>
+        <input type="text" id="rTreatment">
+      </div>
+      <div class="field">
+        <label for="rPrescription">Prescription</label>
+        <input type="text" id="rPrescription">
+      </div>
+
+      <div id="recordErrorBox" class="error-box" hidden></div>
+
+      <div class="panel-actions">
+        <button type="button" class="btn btn-outline" onclick="closeRecordPanel()">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="recordSubmitBtn">
+          <i class="fa-solid fa-check"></i> Save Record
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Edit Patient Panel -->
+<div class="panel-overlay" id="editPanelOverlay" hidden>
+  <div class="panel">
+    <h2>Edit Patient Info</h2>
+    <p class="panel-sub">Update this patient's details.</p>
+
+    <form id="editForm">
+      <div class="field">
+        <label for="ePFullName">Full Name</label>
+        <input type="text" id="ePFullName" required>
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label for="ePGender">Gender</label>
+          <select id="ePGender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ePDob">Date of Birth</label>
+          <input type="date" id="ePDob" required>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="field">
+          <label for="ePPhone">Phone</label>
+          <input type="text" id="ePPhone" required>
+        </div>
+        <div class="field">
+          <label for="ePBloodGroup">Blood Group</label>
+          <input type="text" id="ePBloodGroup">
+        </div>
+      </div>
+      <div class="field">
+        <label for="ePAddress">Address</label>
+        <input type="text" id="ePAddress" required>
+      </div>
+
+      <div id="editErrorBox" class="error-box" hidden></div>
+
+      <div class="panel-actions">
+        <button type="button" class="btn btn-outline" onclick="closeEditPanel()">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="editSubmitBtn">
+          <i class="fa-solid fa-check"></i> Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="./frontend/js/auth.js"></script>
+<script src="./frontend/js/patient.js"></script>
+</body>
+</html>

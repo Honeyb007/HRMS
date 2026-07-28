@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manage Users - HRMS Akunza</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="./frontend/css/style.css">
+</head>
+<body>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <i class="fa-solid fa-notes-medical"></i>
+      <div>HRMS<span class="sb-sub">Akunza PHC</span></div>
+    </div>
+    <nav>
+      <a href="dashboard.html"><i class="fa-solid fa-user-injured"></i> Patients</a>
+      <a href="users.html" class="active"><i class="fa-solid fa-users"></i> Manage Users</a>
+      <a href="profile.html"><i class="fa-solid fa-id-badge"></i> Profile</a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sf-name" id="userName"></div>
+      <span class="sf-role" id="userRole"></span>
+      <button class="btn btn-outline btn-sm btn-block" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i> <span>Logout</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="shell-main">
+    <div class="shell-content">
+
+      <div class="page-title">
+        <div>
+          <h1>Manage Users</h1>
+          <p>Register and view staff accounts. Admin access only.</p>
+        </div>
+        <button class="btn btn-primary" onclick="openUserPanel()">
+          <i class="fa-solid fa-user-plus"></i> Register New Staff
+        </button>
+      </div>
+
+      <div class="tab-row">
+        <button class="tab-btn active" data-tab="all" onclick="setTab('all')">All Staff</button>
+        <button class="tab-btn" data-tab="Admin" onclick="setTab('Admin')">Admins</button>
+        <button class="tab-btn" data-tab="Health Worker" onclick="setTab('Health Worker')">Health Workers</button>
+      </div>
+
+      <div class="card">
+        <div class="table-responsive"><table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Date Added</th>
+            </tr>
+          </thead>
+          <tbody id="userTableBody"></tbody>
+        </table></div>
+
+        <div id="emptyState" class="empty-state" hidden>
+          <i class="fa-solid fa-users"></i>
+          <p>No staff accounts found.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Register Staff Panel -->
+<div class="panel-overlay" id="userPanelOverlay" hidden>
+  <div class="panel">
+    <h2>Register New Staff</h2>
+    <p class="panel-sub">Create a login for an Admin or Health Worker.</p>
+
+    <form id="userForm">
+      <div class="field">
+        <label for="uFullName">Full Name</label>
+        <input type="text" id="uFullName" required>
+      </div>
+
+      <div class="field">
+        <label for="uEmail">Email</label>
+        <input type="email" id="uEmail" required>
+      </div>
+
+      <div class="field">
+        <label for="uPassword">Temporary Password</label>
+        <input type="text" id="uPassword" required placeholder="Staff should change this after first login">
+      </div>
+
+      <div class="field">
+        <label for="uRole">Role</label>
+        <select id="uRole" required>
+          <option value="Health Worker">Health Worker</option>
+          <option value="Admin">Admin</option>
+        </select>
+      </div>
+
+      <div id="userErrorBox" class="error-box" hidden></div>
+
+      <div class="panel-actions">
+        <button type="button" class="btn btn-outline" onclick="closeUserPanel()">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="userSubmitBtn">
+          <i class="fa-solid fa-check"></i> Create Account
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="./frontend/js/auth.js"></script>
+<script src="./frontend/js/users.js"></script>
+</body>
+</html>
